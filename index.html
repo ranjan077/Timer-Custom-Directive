@@ -1,0 +1,48 @@
+<html>
+<head>
+	<title>Timer Directive</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="angular.js"></script>
+	<script type="text/javascript" src="javascript.js"></script>
+	<style type="text/css">
+		.timer{
+			width: 51%;
+			top: 50px;
+			margin: 0 auto;
+		}
+	</style>
+	<script type="text/javascript">
+		var counts =0;
+		$(document).ready(function(){
+			$("#watchcount").click(function(event){
+				counts = getWatchCount();
+				$("#display").html("<b>"+counts+"</b>");
+			});
+		});
+		
+		function getWatchCount(){
+			var total = 0;
+
+			angular.element(".ng-scope").each(
+	        	function ngScopeIterator() {
+
+		            // Get the scope associated with this element node.
+		            var scope = $(this).scope();
+
+		            // The $$watchers value starts out as NULL.
+		            total += scope.$$watchers ? scope.$$watchers.length : 0;
+
+	        	}
+    		);
+
+    		return (total);
+		}
+	</script>
+</head>
+<body ng-app="directiveapp">
+	<div class="timer">
+		<div  timer ></div>
+		<input id="watchcount" type="button" value="Total Watchers count"/>:<span id="display"></span>
+	</div>
+</body>
+</html>
